@@ -44,4 +44,11 @@ public class ActivityServiceImpl implements ActivityService {
         }
         return activities;
     }
+
+    @Override
+    public void addActivity(Activity activity) {
+        SqlSession sqlSession=sqlSessionFactory.openSession(true);
+        ActivityMapper mapper= sqlSession.getMapper(ActivityMapper.class);
+        mapper.addActivity(activity);
+    }
 }

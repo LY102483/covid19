@@ -52,18 +52,18 @@
             </div>
             <form action="${ctx}/activityController/addActivity">
                 <div class="modal-body">
-                    <p class="row"><span class="col-md-3">活动名称：</span><input type="text" id="activi" name="activi" class="col-md-6" ></p>
+                    <p class="row"><span class="col-md-3">活动名称：</span><input type="text" id="activity" name="activity" class="col-md-6" ></p>
                 </div>
                 <div class="modal-body">
                     <p class="row"><span class="col-md-3">活动内容：</span><textarea type="text" id="manage" name="manage" class="col-md-6"></textarea>
                 </div>
                 <div class="modal-body">
                     <p class="row"><span class="col-md-3">活动开始时间：</span>
-                    <input type="text" id="date" name="datetimepicker" value=" " placeholder="查询年月" class="col-md-6"></p>
+                    <input type="text" id="add" name="time" value=" " placeholder="查询年月" class="col-md-6"></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="submit" class="btn btn-primary" onclick="return confirm('您确定修改吗？\n修改完成后将跳转至登陆界面')">提交更改</button>
+                    <button type="submit" class="btn btn-primary" onclick="return confirm('您确定提交吗');">提交</button>
                 </div>
             </form>
         </div>
@@ -157,7 +157,7 @@
 <script>
     //时间选择器
     var date = new Date();
-    $('#date').datetimepicker({
+    $('#add').datetimepicker({
         forceParse: 0,//设置为0，时间不会跳转1899，会显示当前时间。
         language: 'zh-CN',//显示中文
         format: 'yyyy-mm-dd hh:ii',//显示格式
@@ -167,7 +167,7 @@
         todayBtn: true,//显示今日按钮
         startDate: date
     })
-    $("#date").datetimepicker("setDate", new Date() );  //设置显示默认当天的时间
+    $("#add").datetimepicker("setDate", new Date() );  //设置显示默认当天的时间
 
 
     //分页逻辑start

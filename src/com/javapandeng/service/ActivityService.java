@@ -9,4 +9,6 @@ import java.util.List;
  */
 public interface ActivityService {
     List<Activity> getAllActivity();
+
+    void addActivity(Activity activity);
 }

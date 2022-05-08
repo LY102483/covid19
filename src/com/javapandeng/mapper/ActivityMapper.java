@@ -1,6 +1,7 @@
 package com.javapandeng.mapper;
 
 import com.javapandeng.po.Activity;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -11,4 +12,7 @@ import java.util.List;
 public interface ActivityMapper {
     @Select("select * from activity order by id desc")
     List<Activity> getAllActivity();
+
+    @Insert("insert into activity values (#{id},#{activity},#{time},#{manage})")
+    void addActivity(Activity activity);
 }
