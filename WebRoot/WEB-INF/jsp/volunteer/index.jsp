@@ -46,7 +46,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h4 class="modal-title" id="myModalLabel">修改个人信息</h4>
             </div>
-            <form action="${ctx}/volunteerController/updateInfo">
+            <form action="${ctx}/volunteerController/updateInfo" method="post">
                 <div class="modal-body">
                     <p class="row"><span class="col-md-2">联系电话：</span><input type="text" id="newPhone" name="newPhone" value="${volunteer.phone}"></p>
                 </div>

@@ -9,6 +9,17 @@
     <link rel="stylesheet" href="${ctx}/resource/css/admin.css">
     <script src="${ctx}/resource/js/jquery.js"></script>
     <script src="${ctx}/resource/js/pintuer.js"></script>
+<%--    添加--%>
+
+    <%--    bootstarp样式文件--%>
+    <script src="${ctx}/resource/jquery/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="${ctx}/resource/bootstrap-3.4.1/css/bootstrap.min.css">
+    <script src="${ctx}/resource/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+    <%--    时间文件--%>
+    <script src="${ctx}/resource/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="${ctx}/resource/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.css">
+    <script src="${ctx}/resource/bootstrap-datetimepicker-master/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
 </head>
 
 <body style="background-color: #f2f9fd">

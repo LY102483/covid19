@@ -75,9 +75,10 @@ public class volunteerController {
 
     // 修改志愿者联系方式和年龄
     @RequestMapping("/updateInfo")
-    public String updateInfo(String newPhone,int newAge,HttpSession httpSession){
-        Volunteer volunteer = (Volunteer) httpSession.getAttribute("volunteer");
-        volunteerService.updateInfo(volunteer,newPhone,newAge);
+    public String updateInfo(String newPhone,int newAge,HttpSession session){
+        Volunteer volunteer=(Volunteer)session.getAttribute("volunteer");
+        Integer id = volunteer.getId();
+        volunteerService.updateInfo(newPhone,newAge,id);
         return "/login/vLogin";
     }
 

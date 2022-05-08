@@ -1,13 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="test1:war exploded">
-    <output-path>$PROJECT_DIR$/WebRoot</output-path>
-    <properties id="maven-jee-properties">
-      <options>
-        <exploded>true</exploded>
-        <module>test1</module>
-        <packaging>war</packaging>
-      </options>
-    </properties>
+    <output-path>$PROJECT_DIR$/classes/artifacts/test1_war_exploded</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -49,7 +42,6 @@
           <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:1.2.2" />
           <element id="library" level="project" name="Maven: com.github.miemiedev:mybatis-paginator:1.2.15" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.2" />
-          <element id="library" level="project" name="Maven: javax:javaee-api:7.0" />
           <element id="library" level="project" name="Maven: com.sun.mail:javax.mail:1.5.0" />
           <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
           <element id="library" level="project" name="Maven: commons-dbcp:commons-dbcp:1.2.2" />
@@ -82,7 +74,6 @@
           <element id="library" level="project" name="Maven: org.apache.solr:solr-commons-csv:3.5.0" />
           <element id="library" level="project" name="Maven: commons-lang:commons-lang:2.4" />
           <element id="library" level="project" name="Maven: com.google.guava:guava:r05" />
-          <element id="library" level="project" name="Maven: javax.servlet:servlet-api:2.4" />
           <element id="library" level="project" name="Maven: org.apache.solr:solr-solrj:3.5.0" />
           <element id="library" level="project" name="Maven: org.codehaus.woodstox:wstx-asl:3.2.7" />
           <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.9" />
@@ -93,9 +84,6 @@
           <element id="library" level="project" name="Maven: org.json:json:20190722" />
           <element id="library" level="project" name="Maven: com.gitee.qdbp.thirdparty:ueditor:1.4.3.3" />
         </element>
-      </element>
-      <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/WebRoot/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="test1/web/Web" />
     </root>

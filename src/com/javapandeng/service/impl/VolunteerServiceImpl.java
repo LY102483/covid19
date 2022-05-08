@@ -52,12 +52,10 @@ public class VolunteerServiceImpl implements VolunteerService {
     }
 
     @Override
-    public void updateInfo(Volunteer volunteer, String newPhone, int newAge) {
+    public void updateInfo(String newPhone, int newAge,int id) {
         SqlSession sqlSession=sqlSessionFactory.openSession(true);
         VolunteerMapper mapper= sqlSession.getMapper(VolunteerMapper.class);
-        volunteer.setPhone(newPhone);
-        volunteer.setAge(newAge);
-        mapper.updateInfo(volunteer);
+        mapper.updateInfo(newPhone,newAge,id);
     }
     //删除志愿者的方法
     @Override

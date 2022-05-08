@@ -16,7 +16,7 @@ public interface VolunteerService {
 
     void updatePassword(Volunteer volunteer, String newPassword);
 
-    void updateInfo(Volunteer volunteer, String newPhone, int newAge);
+    void updateInfo(String newPhone, int newAge,int id);
 
     void deleteVolunteer(int id);
 

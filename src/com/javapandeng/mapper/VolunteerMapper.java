@@ -20,7 +20,7 @@ public interface VolunteerMapper {
     void updatePassword(Volunteer volunteer);
 
     @Update(" update volunteer set phone=#{phone},age=#{age} where id=#{id}")
-    void updateInfo(Volunteer volunteer);
+    void updateInfo(@Param("phone") String newPhone, @Param("age")int newAge,@Param("id")int id);
 
     @Delete("DELETE FROM volunteer WHERE id=#{id}")
     void deleteVolunteer(int id);

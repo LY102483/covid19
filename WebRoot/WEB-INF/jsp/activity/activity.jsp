@@ -197,7 +197,10 @@
                 url:"${ctx}/activityController/deleteActivity?id="+id,
                 method:"POST",
             })
-            location.reload();
+            setTimeout(function(){
+                alert("删除成功");
+                location.reload();
+            },3000);
         }
     }
 
