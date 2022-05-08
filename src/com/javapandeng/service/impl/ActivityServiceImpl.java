@@ -2,6 +2,7 @@ package com.javapandeng.service.impl;
 
 import com.javapandeng.mapper.ActivityMapper;
 import com.javapandeng.po.Activity;
+import com.javapandeng.po.Volunteer;
 import com.javapandeng.service.ActivityService;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -50,5 +51,27 @@ public class ActivityServiceImpl implements ActivityService {
         SqlSession sqlSession=sqlSessionFactory.openSession(true);
         ActivityMapper mapper= sqlSession.getMapper(ActivityMapper.class);
         mapper.addActivity(activity);
+    }
+
+    @Override
+    public void updateActivity(int id, String time) {
+        SqlSession sqlSession=sqlSessionFactory.openSession(true);
+        ActivityMapper mapper= sqlSession.getMapper(ActivityMapper.class);
+        mapper.updateActivity(id,time);
+    }
+
+    @Override
+    public void deleteActivity(int id) {
+        SqlSession sqlSession=sqlSessionFactory.openSession(true);
+        ActivityMapper mapper= sqlSession.getMapper(ActivityMapper.class);
+        mapper.deleteActivity(id);
+    }
+
+    @Override
+    public List<Volunteer> selectJoinVolunteer(int id) {
+        SqlSession sqlSession=sqlSessionFactory.openSession(true);
+        ActivityMapper mapper= sqlSession.getMapper(ActivityMapper.class);
+        // return mapper.selectJoinVolunteer(id);
+        return null;
     }
 }

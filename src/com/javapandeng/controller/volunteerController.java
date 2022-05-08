@@ -16,9 +16,6 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/volunteerController")
 public class volunteerController {
-    /**
-     * Warning：还未配置拦截器！！！！
-     * */
     @Autowired
     private VolunteerService volunteerService;
 
@@ -29,8 +26,11 @@ public class volunteerController {
     }
     //首页
     @RequestMapping("/toIndex")
-    public String toIndex(){
-        return "/volunteer/index";
+    public ModelAndView toIndex(Volunteer volunteer,ModelAndView modelAndView){
+        modelAndView.setViewName("redirect:/volunteer/index");
+        //进入首页前的准备工作
+        modelAndView.addObject("allActivity",volunteerService.getAllActivities(volunteer.getId()));
+        return modelAndView;
     }
     //登陆方法
     @RequestMapping("/loginVolunteer")

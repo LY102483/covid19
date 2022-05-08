@@ -69,6 +69,36 @@
         </div>
     </div>
 </div>
+<%--修改活动的模态框--%>
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">修改活动</h4>
+            </div>
+            <form action="${ctx}/activityController/updateActivity">
+                <div class="modal-body">
+                    <p class="row"><span class="col-md-3">活动ID：</span><input id="newActivityId" type="text" class="col-md-6" value=""  disabled></p>
+                </div>
+                <div class="modal-body">
+                    <p class="row"><span class="col-md-3">活动名称：</span><input id="newActivityName" type="text" class="col-md-6" disabled></p>
+                </div>
+                <div class="modal-body">
+                    <p class="row"><span class="col-md-3">活动内容：</span><textarea id="newActivityContent" type="text" class="col-md-6" disabled></textarea>
+                </div>
+                <div class="modal-body">
+                    <p class="row"><span class="col-md-3">活动开始时间：</span>
+                        <input type="text" id="newTime" name="newTime" value=" " placeholder="查询年月" class="col-md-6"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary" onclick="return confirm('您确定提交吗');">提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <!-- 模态框end( Modal )  -->
 
 
@@ -100,13 +130,8 @@
                         <th>
                             <button
                                     class='btn btn-info' data-toggle='modal'
-                                    data-target='#myModal1' onclick="function selectJoinVolunteer(id) {
-                                        $.ajax({
-                                        <%--url:"",--%>
-                                        <%--type:"get"--%>
-                                        })
-                                    }
-                                    selectJoinVolunteer(${activity.id})">查看
+                                    data-target='#myModal3'
+                                    onclick="selectJoinVolunteer(${activity.id})">查看
                             </button>
                             <c:choose>
                                 <c:when test="${activity.sState == 1 }">
@@ -114,11 +139,9 @@
                                     </button>
                                 </c:when>
                                 <c:otherwise>
-                                    <button class='btn btn-info' data-toggle='modal'
-                                            data-target='#myModal2'>修改
-                                    </button>
                                     <button class='btn btn-danger'
-                                            onclick='del(${activity.id})'>删除
+                                            onclick='
+                                                    deleteActivity(${activity.id})'>删除
                                     </button>
                                 </c:otherwise>
                             </c:choose>
@@ -155,6 +178,35 @@
 
 
 <script>
+    //查看活动报名人的方法
+    function selectJoinVolunteer() {
+        $.ajax({
+            url:"${ctx}/activityController/selectJoinVolunteer?id="+id,
+            method:"POST",
+        })
+    }
+
+    //删除活动的方法
+    function deleteActivity(id) {
+        if(confirm("确定删除吗？")){
+            $.ajax({
+                url:"${ctx}/activityController/deleteActivity?id="+id,
+                method:"POST",
+            })
+            location.reload();
+        }
+    }
+
+
+    //修改活动模态框
+    function update() {
+        $("#name").attr("value", document.getElementById("myTable").rows[index].cells[0].innerHTML);
+        $("#account").attr("value", document.getElementById("myTable").rows[index].cells[1].innerHTML);
+        $("#classNO").attr("value", document.getElementById("myTable").rows[index].cells[2].innerHTML);
+        $("#phone").attr("value", document.getElementById("myTable").rows[index].cells[3].innerHTML);
+    }
+
+
     //时间选择器
     var date = new Date();
     $('#add').datetimepicker({

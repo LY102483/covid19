@@ -1,10 +1,13 @@
 package com.javapandeng.mapper;
 
+import com.javapandeng.po.Activity;
 import com.javapandeng.po.Volunteer;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+
+import java.util.List;
 
 /**
  * Create by LiuYang on 2022/5/7 20:11
@@ -25,4 +28,8 @@ public interface VolunteerMapper {
 
     @Delete("DELETE FROM volunteer WHERE id=#{id}")
     void deleteVolunteer(int id);
+
+    //志愿者查询该活动有没有报名
+    @Select("select * from volu-activity where volunteer_id=#{vId} and activity_id=#{aId}")
+    int checkJoin(int vId,int aId);
 }

@@ -1,6 +1,7 @@
 package com.javapandeng.controller;
 
 import com.javapandeng.po.Activity;
+import com.javapandeng.po.Volunteer;
 import com.javapandeng.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,9 @@ import java.util.List;
 public class ActivityController {
     @Autowired
     ActivityService activityService;
+
+
+
     //获取活动列表
     @RequestMapping("/getAllActivity")
     public ModelAndView getAllActivity(ModelAndView modelAndView){
@@ -46,6 +50,29 @@ public class ActivityController {
         res.setManage(manage);
         //数据处理
         activityService.addActivity(res);
-        return "redirect:/activityController//getAllActivity";
+        return "redirect:/activityController/getAllActivity";
+    }
+
+    //修改活动时间
+    @RequestMapping("/updateActivity")
+    public String updateActivity(int id,String time) throws ParseException {
+        //转换时间
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date date=format.parse(time);
+        //数据处理
+        activityService.updateActivity(id,time);
+        return "redirect:/activityController/getAllActivity";
+    }
+
+    //删除活动
+    @RequestMapping("/deleteActivity")
+    public void deleteActivity(int id){
+        activityService.deleteActivity(id);
+    }
+
+    //查看报名人员
+    @RequestMapping("/selectJoinVolunteer")
+    public List<Volunteer> selectJoinVolunteer(int id){
+        return activityService.selectJoinVolunteer(id);
     }
 }

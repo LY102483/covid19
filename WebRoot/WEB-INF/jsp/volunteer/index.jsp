@@ -98,16 +98,40 @@
                     </tr>
                     </thead>
                     <tbody id="adminTbody">
-                    <tr style="">
-                        <th>活动1</th>
-                        <th>活动是干嘛</th>
-                        <th>2022/5/7</th>
-                        <th>
-                            <button class="btn btn-info" data-toggle="modal" id="2020201482" onclick="modify(1)"
-                                    data-target="#myModal1">修改
-                            </button>
-                        </th>
-                    </tr>
+                        <c:forEach items="${allActivity}" var="activity">
+                            <tr>
+                                <th>${activity.id}</th>
+                                <th>${activity.activity}</th>
+                                <th>${activity.manage}</th>
+                                <th>${activity.date}</th>
+                                <th>
+                                    <c:choose>
+                                        <c:when test="${activity.sState == 1 }">
+                                            <button class='btn btn-danger disabled'>已结束
+                                            </button>
+                                        </c:when>
+                                            <c:otherwise>
+                                                <c:choose>
+                                                    <c:when test="${activity.vState == 0 }">
+                                                        <button class='btn btn-success'
+                                                        onclick="joinA(${volunteer.id},${activity.id})">报名
+                                                        </button>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <button
+                                                                class='btn btn-danger' data-toggle='modal'
+                                                                data-target='#myModal3'
+                                                                onclick="exitA(${volunteer.id},${activity.id})">取消报名
+                                                        </button>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                        </c:otherwise>
+                                    </c:choose>
+
+                                </th>
+
+                            </tr>
+                        </c:forEach>
                     </tbody>
                 </table>
                 <!--                分页start-->

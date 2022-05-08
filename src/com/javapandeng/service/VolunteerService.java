@@ -1,6 +1,9 @@
 package com.javapandeng.service;
 
+import com.javapandeng.po.Activity;
 import com.javapandeng.po.Volunteer;
+
+import java.util.List;
 
 /**
  * Create by LiuYang on 2022/5/7 20:37
@@ -16,4 +19,7 @@ public interface VolunteerService {
     void updateInfo(Volunteer volunteer, String newPhone, int newAge);
 
     void deleteVolunteer(int id);
+
+    //志愿者获取所有活动并检查是否报名
+    List<Activity> getAllActivities(int id);
 }
