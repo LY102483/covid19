@@ -26,11 +26,12 @@ public class volunteerController {
     }
     //首页
     @RequestMapping("/toIndex")
-    public ModelAndView toIndex(Volunteer volunteer,ModelAndView modelAndView){
-        modelAndView.setViewName("redirect:/volunteer/index");
+    public String toIndex(HttpSession httpSession){
+        Volunteer volunteer=(Volunteer) httpSession.getAttribute("volunteer");
+        int volunteer_id=volunteer.getId();
         //进入首页前的准备工作
-        modelAndView.addObject("allActivity",volunteerService.getAllActivities(volunteer.getId()));
-        return modelAndView;
+        httpSession.setAttribute("allActivities",volunteerService.getAllActivities(volunteer_id));
+        return "/volunteer/index";
     }
     //登陆方法
     @RequestMapping("/loginVolunteer")
@@ -85,4 +86,21 @@ public class volunteerController {
     public void deleteVolunteer(int id){
         volunteerService.deleteVolunteer(id);
     }
+
+    //退出活动
+    @RequestMapping("/exitActivity")
+    public void exitActivity(int vId,int aId){
+        volunteerService.exitActivity(vId,aId);
+    }
+
+    //加入活动
+    @RequestMapping("/joinActivity")
+    public String joinActivity(int vId,int aId,ModelAndView modelAndView){
+        volunteerService.joinActivity(vId,aId);
+        return "/volunteer/index";
+    }
+
+
+
+
 }

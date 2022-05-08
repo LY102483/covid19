@@ -21,126 +21,42 @@
     <script src="${ctx}/resource/bootstrap-datetimepicker-master/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 </head>
 <body>
-
-<!-- 模态框start( Modal )  -->
-<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="myModalLabel">查看报名信息</h4>
-            </div>
-
-                <div class="modal-body">
-                    <p class="row"><span class="col-md-2">新密码：</span><input type="text" id="newPassword" name="newPassword"></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="submit" class="btn btn-primary" onclick="return confirm('您确定修改吗？\n修改完成后将跳转至登陆界面')">提交更改</button>
-                </div>
-
-        </div>
-    </div>
-</div>
-<%--添加活动的模态框--%>
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="myModalLabel">添加活动</h4>
-            </div>
-            <form action="${ctx}/activityController/addActivity">
-                <div class="modal-body">
-                    <p class="row"><span class="col-md-3">活动名称：</span><input type="text" id="activity" name="activity" class="col-md-6" ></p>
-                </div>
-                <div class="modal-body">
-                    <p class="row"><span class="col-md-3">活动内容：</span><textarea type="text" id="manage" name="manage" class="col-md-6"></textarea>
-                </div>
-                <div class="modal-body">
-                    <p class="row"><span class="col-md-3">活动开始时间：</span>
-                    <input type="text" id="add" name="time" value=" " placeholder="查询年月" class="col-md-6"></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="submit" class="btn btn-primary" onclick="return confirm('您确定提交吗');">提交</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<%--查看参与人员的--%>
-<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="myModalLabel">查看报名人员</h4>
-            </div>
-            <table class='table table-striped'>
-                <thead>
-                <tr>
-                    <th>姓名</th>
-                    <th>性别</th>
-                    <th>年龄</th>
-                    <th>手机号</th>
-                </tr>
-                </thead>
-                <tbody id="resultTBody">
-
-                </tbody>
-            </table>
-            <!--                分页start-->
-        </div>
-    </div>
-</div>
-<!-- 模态框end( Modal )  -->
-
-
 <div class="container-fluid" >
     <div class="row">
         <div class="col-md-12 panel panel-primary" style="padding: 0">
             <div class="panel-heading" style="display: flex;justify-content: space-between">
-                <h3 class="panel-title" style="align-self: center">活动管理</h3>
-                <button class="btn btn-info" data-toggle='modal' data-target='#myModal2'>添加活动</button>
+                <h3 class="panel-title" style="align-self: center">志愿者管理</h3>
+
             </div>
             <div class="panel-body">
                 <table id="myTable" class='table table-striped'>
                     <thead>
                     <tr>
-                        <th>活动ID</th>
-                        <th>活动名称</th>
-                        <th>活动内容</th>
-                        <th>开始时间</th>
+                        <th>ID</th>
+                        <th>姓名</th>
+                        <th>性别</th>
+                        <th>年龄</th>
+                        <th>电话</th>
                         <th>操作</th>
                     </tr>
                     </thead>
                     <tbody id="adminTbody">
-                    <c:forEach items="${allActivity}" var="activity">
+                    <c:forEach items="${allVolunteer}" var="volunteer">
                     <tr>
-                        <th>${activity.id}</th>
-                        <th>${activity.activity}</th>
-                        <th>${activity.manage}</th>
-                        <th>${activity.date}</th>
+                        <th>${volunteer.id}</th>
+                        <th>${volunteer.realname}</th>
+                        <th>${volunteer.sex}</th>
+                        <th>${volunteer.age}</th>
+                        <th>${volunteer.phone}</th>
                         <th>
                             <button
-                                    class='btn btn-info' data-toggle='modal'
-                                    data-target='#myModal3'
-                                    onclick="selectJoinVolunteer(${activity.id})">查看
+                                    class='btn btn-info'
+                                    onclick="updatePassword(${volunteer.id})">重置密码
                             </button>
-                            <c:choose>
-                                <c:when test="${activity.sState == 1 }">
-                                    <button class='btn btn-danger disabled'>已过期
-                                    </button>
-                                </c:when>
-                                <c:otherwise>
-                                    <button class='btn btn-danger'
-                                            onclick='
-                                                    deleteActivity(${activity.id})'>删除
-                                    </button>
-                                </c:otherwise>
-                            </c:choose>
-
+                            <button
+                                    class='btn btn-danger'
+                                    onclick="deleteV(${volunteer.id})">删除
+                            </button>
                         </th>
 
                     </tr>
@@ -173,41 +89,33 @@
 
 
 <script>
-    //查看活动报名人的方法
-    function selectJoinVolunteer(id) {
-        $.ajax({
-            url:"${ctx}/activityController/selectJoinVolunteer?id="+id,
-            type:"GET",
-            success:function (data){
-                $("#resultTBody").html("");
-                var html="";
-                $.each(data,function (i,dom) {
-                    console.log(dom.toString());
-                    html+="<tr><th>"+dom.realname+"</th>"+"<th>"+dom.sex+"</th>"+"<th>"+dom.age+"</th>"+"<th>"+dom.phone+"</th></tr>"
-                });
-                $("#resultTBody").append(html);
-            }
-        })
-    }
-
-    //删除活动的方法
-    function deleteActivity(id) {
-        if(confirm("确定删除吗？")){
+    //重置密码
+    function updatePassword(id){
+        if(confirm("密码将会被重置为123456！！\n确定吗")){
             $.ajax({
-                url:"${ctx}/activityController/deleteActivity?id="+id,
+                url:"${ctx}/volunteerSysController/reSetPassword?id="+id,
                 method:"POST",
+
             })
-            location.reload();
+            alert("重置成功")
         }
     }
 
+    //删除
+    function deleteV(id){
+        if(confirm("确定删除吗？")){
+            $.ajax({
+                url:"${ctx}/volunteerSysController/deleteVolunteer?id="+id,
+                method:"POST",
+            })
+            setTimeout(function(){
+                alert("删除成功");
+                location.reload();
+            },3000);
 
-    //修改活动模态框
-    function update() {
-        $("#name").attr("value", document.getElementById("myTable").rows[index].cells[0].innerHTML);
-        $("#account").attr("value", document.getElementById("myTable").rows[index].cells[1].innerHTML);
-        $("#classNO").attr("value", document.getElementById("myTable").rows[index].cells[2].innerHTML);
-        $("#phone").attr("value", document.getElementById("myTable").rows[index].cells[3].innerHTML);
+
+
+        }
     }
 
 

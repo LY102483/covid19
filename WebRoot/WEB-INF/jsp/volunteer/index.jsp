@@ -91,6 +91,7 @@
                 <table id="myTable" class="table table-striped">
                     <thead>
                     <tr>
+                        <th>活动序号</th>
                         <th>活动名称</th>
                         <th>活动内容</th>
                         <th>截止时间</th>
@@ -98,7 +99,7 @@
                     </tr>
                     </thead>
                     <tbody id="adminTbody">
-                        <c:forEach items="${allActivity}" var="activity">
+                        <c:forEach items="${allActivities}" var="activity">
                             <tr>
                                 <th>${activity.id}</th>
                                 <th>${activity.activity}</th>
@@ -110,22 +111,22 @@
                                             <button class='btn btn-danger disabled'>已结束
                                             </button>
                                         </c:when>
-                                            <c:otherwise>
-                                                <c:choose>
-                                                    <c:when test="${activity.vState == 0 }">
-                                                        <button class='btn btn-success'
-                                                        onclick="joinA(${volunteer.id},${activity.id})">报名
-                                                        </button>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <button
-                                                                class='btn btn-danger' data-toggle='modal'
-                                                                data-target='#myModal3'
-                                                                onclick="exitA(${volunteer.id},${activity.id})">取消报名
-                                                        </button>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                        </c:otherwise>
+                                        <c:otherwise>
+                                            <c:choose>
+                                                <c:when test="${activity.vState == 1 }">
+                                                    <button
+                                                            class='btn btn-danger' data-toggle='modal'
+                                                            data-target='#myModal3'
+                                                            onclick="exitA(${volunteer.id},${activity.id})">取消报名
+                                                    </button>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <button class='btn btn-success'
+                                                            onclick="joinA(${volunteer.id},${activity.id})">报名
+                                                    </button>
+                                                </c:otherwise>
+                                            </c:choose>
+                                    </c:otherwise>
                                     </c:choose>
 
                                 </th>
@@ -157,6 +158,29 @@
 </div>
 
 <script>
+    //参加活动
+    function joinA(vId,aId) {
+        if(confirm('确定报名吗？')){
+            $.post('${ctx}/volunteerController/joinActivity?vId='+vId+'&'+'aId='+aId);
+            $.ajax({
+                url:"${ctx}/volunteerController/toIndex",
+                type:"GET"
+            })
+            location.reload();
+        }
+    }
+    //退出活动
+    function exitA(vId,aId) {
+        if(confirm('确定取消报名？')){
+            $.post('${ctx}/volunteerController/exitActivity?vId='+vId+'&'+'aId='+aId);
+            $.ajax({
+                url:"${ctx}/volunteerController/toIndex",
+                type:"GET"
+            })
+            location.reload();
+        }
+    }
+    //志愿者退出
     function exit(){
         if(confirm("确认退出吗？")){
             $.ajax({

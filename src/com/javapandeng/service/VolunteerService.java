@@ -21,5 +21,13 @@ public interface VolunteerService {
     void deleteVolunteer(int id);
 
     //志愿者获取所有活动并检查是否报名
-    List<Activity> getAllActivities(int id);
+    List<Activity> getAllActivities(int volunteer_id);
+
+    void exitActivity(int vId, int aId);
+
+    void joinActivity(int vId, int aId);
+
+    List<Volunteer> getAllVolunteer();
+
+    void reSetPassword(int id);
 }

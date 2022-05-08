@@ -41,7 +41,6 @@ public class ActivityServiceImpl implements ActivityService {
             }else{
                 activity.setsState(0);
             }
-            //判断活动是否参加
         }
         return activities;
     }
@@ -64,6 +63,11 @@ public class ActivityServiceImpl implements ActivityService {
     public void deleteActivity(int id) {
         SqlSession sqlSession=sqlSessionFactory.openSession(true);
         ActivityMapper mapper= sqlSession.getMapper(ActivityMapper.class);
+        //先删除关系表
+        for (Volunteer volunteer : mapper.selectJoinVolunteer(id)) {
+            mapper.exitActivity(volunteer.getId(),id);
+        }
+        //再删除活动
         mapper.deleteActivity(id);
     }
 
@@ -71,7 +75,6 @@ public class ActivityServiceImpl implements ActivityService {
     public List<Volunteer> selectJoinVolunteer(int id) {
         SqlSession sqlSession=sqlSessionFactory.openSession(true);
         ActivityMapper mapper= sqlSession.getMapper(ActivityMapper.class);
-        // return mapper.selectJoinVolunteer(id);
-        return null;
+        return mapper.selectJoinVolunteer(id);
     }
 }

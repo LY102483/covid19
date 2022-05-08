@@ -50,6 +50,9 @@ public class Activity {
                 ", time=" + time +
                 ", manage='" + manage + '\'' +
                 ", volunteer=" + volunteer +
+                ", date='" + date + '\'' +
+                ", vState=" + vState +
+                ", sState=" + sState +
                 '}';
     }
 

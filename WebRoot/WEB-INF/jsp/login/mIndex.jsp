@@ -30,7 +30,7 @@
     <h2><span class="icon-user"></span>基本设置 </h2>
     <ul style="display: block">
         <li><a href="${ctx}/activity/activity" target="right"><span class="icon-caret-right"></span>用户管理</a></li>
-        <li><a href="${ctx}/user/findBySql" target="right"><span class="icon-caret-right"></span>志愿者管理</a></li>
+        <li><a href="${ctx}/volunteerSysController/getAllVolunteer" target="right"><span class="icon-caret-right"></span>志愿者管理</a></li>
         <li><a href="${ctx}/activityController/getAllActivity" target="right"><span class="icon-caret-right"></span>志愿活动管理</a></li>
         <li><a href="${ctx}/itemCategory/findBySql" target="right"><span class="icon-caret-right"></span>类目管理</a></li>
         <li><a href="${ctx}/item/findBySql" target="right"><span class="icon-caret-right"></span>商品管理</a></li>

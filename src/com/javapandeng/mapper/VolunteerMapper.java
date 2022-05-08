@@ -1,11 +1,7 @@
 package com.javapandeng.mapper;
 
-import com.javapandeng.po.Activity;
 import com.javapandeng.po.Volunteer;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -30,6 +26,12 @@ public interface VolunteerMapper {
     void deleteVolunteer(int id);
 
     //志愿者查询该活动有没有报名
-    @Select("select * from volu-activity where volunteer_id=#{vId} and activity_id=#{aId}")
-    int checkJoin(int vId,int aId);
+    @Select("select activity_id from volu_activity where volunteer_id=#{volunteer_id}")
+    List<Integer> checkJoin(@Param("volunteer_id") int volunteer_id);
+    //查询所有志愿者
+    @Select("select * from volunteer")
+    List<Volunteer> getAllVolunteer();
+    //重置志愿者密码
+    @Update("update volunteer set password='123456' where id=#{id}")
+    void reSetPassword(int id);
 }

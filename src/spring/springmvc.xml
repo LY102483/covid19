@@ -54,7 +54,6 @@
             <!--配置对哪些资源不进行拦截操作-->
             <mvc:exclude-mapping path="/volunteerController/loginVolunteer"/>
             <mvc:exclude-mapping path="/volunteerController/addVolunteer"/>
-
             <bean class="com.javapandeng.interceptor.PrivilegeInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

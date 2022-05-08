@@ -20,6 +20,7 @@ public class PrivilegeInterceptor implements HandlerInterceptor {
         Volunteer volunteer = (Volunteer) httpSession.getAttribute("volunteer");
         // 如果volunteer为空则重定向
         if (volunteer == null) {
+
             response.sendRedirect(request.getContextPath() + "/login/toVLogin");
             return false;
         }
