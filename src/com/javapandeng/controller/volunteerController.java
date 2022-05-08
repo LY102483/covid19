@@ -1,0 +1,88 @@
+package com.javapandeng.controller;
+
+import com.javapandeng.po.Volunteer;
+import com.javapandeng.service.VolunteerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+/**
+ * Create by LiuYang on 2022/5/7 15:54
+ */
+@Controller
+@RequestMapping("/volunteerController")
+public class volunteerController {
+    /**
+     * Warning：还未配置拦截器！！！！
+     * */
+    @Autowired
+    private VolunteerService volunteerService;
+
+    //登录页
+    @RequestMapping("/toLogin")
+    public String toLogin(){
+        return "/login/vLogin";
+    }
+    //首页
+    @RequestMapping("/toIndex")
+    public String toIndex(){
+        return "/volunteer/index";
+    }
+    //登陆方法
+    @RequestMapping("/loginVolunteer")
+    public ModelAndView login(Volunteer loginVolunteer, HttpSession httpSession,ModelAndView modelAndView) throws Exception {
+        Volunteer volunteer=volunteerService.loginVolunteer(loginVolunteer);
+        if(volunteer!=null){
+            httpSession.setAttribute("volunteer",volunteer);
+            modelAndView.setViewName("redirect:/volunteerController/toIndex");
+        }else {
+            modelAndView.addObject("info","账号或密码不正确！！");
+            modelAndView.setViewName("/login/vLogin");
+        }
+        return modelAndView;
+    }
+    //退出方法
+    @RequestMapping("/exit")
+    public boolean exit(HttpServletRequest request){
+        request.getSession().setAttribute("volunteer",null);
+        return true;
+    }
+    //志愿者注册
+    @RequestMapping("/addVolunteer")
+    public ModelAndView addVolunteer(Volunteer volunteer,ModelAndView modelAndView,HttpSession httpSession){
+        boolean res=volunteerService.addVolunteer(volunteer);
+        if(res){
+            httpSession.setAttribute("volunteer",volunteer);
+            modelAndView.setViewName("/volunteer/index");
+        }else{
+            modelAndView.addObject("info","当前手机号已注册，如有疑问，请联系管理员！");
+            modelAndView.setViewName("redirect:/login/beVolunteer");
+        }
+        return modelAndView;
+    }
+    // 修改志愿者密码
+    @RequestMapping("/updatePassword")
+    public String updatePassword(String newPassword,HttpSession httpSession){
+        Volunteer volunteer = (Volunteer) httpSession.getAttribute("volunteer");
+        volunteerService.updatePassword(volunteer,newPassword);
+        return "/login/vLogin";
+    }
+
+    // 修改志愿者联系方式和年龄
+    @RequestMapping("/updateInfo")
+    public String updateInfo(String newPhone,int newAge,HttpSession httpSession){
+        Volunteer volunteer = (Volunteer) httpSession.getAttribute("volunteer");
+        volunteerService.updateInfo(volunteer,newPhone,newAge);
+        return "/login/vLogin";
+    }
+
+    // 删除志愿者(通过ID)
+    @RequestMapping("/deleteVolunteer")
+    public void deleteVolunteer(int id){
+        volunteerService.deleteVolunteer(id);
+    }
+}

@@ -1,0 +1,40 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<!DOCTYPE mapper-->
+<!--        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"-->
+<!--        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
+<!--<mapper namespace="com.javapandeng.mapper.VolunteerMapper">-->
+<!--    &lt;!&ndash;志愿者登陆(通过手机号)&ndash;&gt;-->
+<!--    <select id="loginVolunteer" parameterType="com.javapandeng.po.Volunteer" resultType="com.javapandeng.po.Volunteer">-->
+<!--        select * from volunteer where phone=#{phone} and password=#{password}-->
+<!--    </select>-->
+
+
+<!--    &lt;!&ndash;查询所有志愿者&ndash;&gt;-->
+<!--    <select id="findAllVolunteer" resultType="com.javapandeng.po.Volunteer">-->
+<!--        select * from volunteer-->
+<!--    </select>-->
+
+
+<!--    &lt;!&ndash;增加志愿者&ndash;&gt;-->
+<!--    <insert id="addVolunteer" parameterType="com.javapandeng.po.Volunteer">-->
+<!--        insert into volunteer values (#{id},#{vname},#{password},#{realname},#{sex},#{age},#{phone},#{address})-->
+<!--    </insert>-->
+
+<!--    &lt;!&ndash;修改志愿者密码&ndash;&gt;-->
+<!--    <update id="updatePassword" parameterType="com.javapandeng.po.Volunteer">-->
+<!--       update volunteer set password=#{password} where id=#{id}-->
+<!--    </update>-->
+
+<!--    &lt;!&ndash;修改志愿者联系方式和年龄&ndash;&gt;-->
+<!--    <update id="updateInfo" parameterType="com.javapandeng.po.Volunteer">-->
+<!--        update volunteer set age=#{age},phone=#{phone} where id=#{id}-->
+<!--    </update>-->
+
+
+<!--    &lt;!&ndash;删除志愿者(通过ID)&ndash;&gt;-->
+<!--    <delete id="deleteVolunteer" parameterType="java.lang.Integer">-->
+<!--        delete from  volunteer where id=#{id}-->
+<!--    </delete>-->
+
+
+<!--</mapper>-->
