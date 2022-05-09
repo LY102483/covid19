@@ -183,7 +183,7 @@
                 var html="";
                 $.each(data,function (i,dom) {
                     console.log(dom.toString());
-                    html+="<tr><th>"+dom.realname+"</th>"+"<th>"+dom.sex+"</th>"+"<th>"+dom.age+"</th>"+"<th>"+dom.phone+"</th></tr>"
+                    html+="<tr><td>"+dom.realname+"</td>"+"<td>"+dom.sex+"</td>"+"<td>"+dom.age+"</td>"+"<td>"+dom.phone+"</td></tr>"
                 });
                 $("#resultTBody").append(html);
             }

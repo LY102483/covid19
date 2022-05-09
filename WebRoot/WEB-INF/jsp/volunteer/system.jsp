@@ -24,9 +24,8 @@
 <div class="container-fluid" >
     <div class="row">
         <div class="col-md-12 panel panel-primary" style="padding: 0">
-            <div class="panel-heading" style="display: flex;justify-content: space-between">
+            <div class="panel-heading" style="display: flex;justify-content: space-between;background-color: ">
                 <h3 class="panel-title" style="align-self: center">志愿者管理</h3>
-
             </div>
             <div class="panel-body">
                 <table id="myTable" class='table table-striped'>
@@ -43,12 +42,12 @@
                     <tbody id="adminTbody">
                     <c:forEach items="${allVolunteer}" var="volunteer">
                     <tr>
-                        <th>${volunteer.id}</th>
-                        <th>${volunteer.realname}</th>
-                        <th>${volunteer.sex}</th>
-                        <th>${volunteer.age}</th>
-                        <th>${volunteer.phone}</th>
-                        <th>
+                        <td>${volunteer.id}</td>
+                        <td>${volunteer.realname}</td>
+                        <td>${volunteer.sex}</td>
+                        <td>${volunteer.age}</td>
+                        <td>${volunteer.phone}</td>
+                        <td>
                             <button
                                     class='btn btn-info'
                                     onclick="updatePassword(${volunteer.id})">重置密码
@@ -57,7 +56,7 @@
                                     class='btn btn-danger'
                                     onclick="deleteV(${volunteer.id})">删除
                             </button>
-                        </th>
+                        </td>
 
                     </tr>
                     </c:forEach>

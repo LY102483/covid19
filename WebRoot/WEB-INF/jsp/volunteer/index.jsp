@@ -66,21 +66,26 @@
 <div class="container" style="margin-top: 100px">
     <div class="row">
         <div class="col-md-12 panel panel-primary" style="padding: 0">
-            <div class=" panel-heading" style="display: flex;justify-content: space-between">
+            <div class=" panel-heading" style="display: flex;justify-content: space-between;align-items: center">
                 <h3 class="panel-title col-md-2" style="align-self: center">志愿者后台</h3>
                 <div class="col-md-10" style="display: flex;justify-content: space-around">
-                    <span>姓名：${volunteer.realname}</span><span>年龄：${volunteer.age}岁</span><span>联系电话:${volunteer.phone}</span>
-                    <button class="btn btn-info" data-toggle='modal' data-target='#myModal1'>修改密码</button>
+
+                    <div class="col-md-11" style="display: flex;align-items: center;align-content: center;justify-content: center">
+                        <h2 style="margin: 0;padding: 0">欢迎您 ：${volunteer.realname}</h2>
+                    </div>
+                    <div class="col-md-1">
+                        <button class="btn btn-info" onclick="exit()">退出</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-2">
-            <ul class="nav nav-pills nav-stacked">
+            <ul class="nav nav-pills nav-stacked" >
                 <li class="active"><a href="student_info.php">志愿活动列表</a></li>
+                <li><a data-toggle='modal' data-target='#myModal1'>修改密码</a></li>
                 <li><a data-toggle='modal' data-target='#myModal2'>修改个人信息</a></li>
-                <li><a onclick="exit()">退出</a></li>
             </ul>
         </div>
         <div class="col-md-10 panel panel-primary" style="padding: 0">
@@ -101,11 +106,11 @@
                     <tbody id="adminTbody">
                         <c:forEach items="${allActivities}" var="activity">
                             <tr>
-                                <th>${activity.id}</th>
-                                <th>${activity.activity}</th>
-                                <th>${activity.manage}</th>
-                                <th>${activity.date}</th>
-                                <th>
+                                <td>${activity.id}</td>
+                                <td>${activity.activity}</td>
+                                <td>${activity.manage}</td>
+                                <td>${activity.date}</td>
+                                <td>
                                     <c:choose>
                                         <c:when test="${activity.sState == 1 }">
                                             <button class='btn btn-danger disabled'>已结束
@@ -129,7 +134,7 @@
                                     </c:otherwise>
                                     </c:choose>
 
-                                </th>
+                                </td>
 
                             </tr>
                         </c:forEach>
@@ -218,6 +223,7 @@
             undefined
             $("#adminTbody tr").eq(i).show();
         }
+
         var tempStr = "共 " + num + " 条记录        共 " + totalPage + " 页        当前第 " + currentPage + " 页";
         document.getElementById("barcon1").innerHTML = tempStr;
 
